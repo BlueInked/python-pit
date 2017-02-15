@@ -23,6 +23,7 @@ soup = BeautifulSoup(r.text)
 # find and loop through all elements on the page with the 
 # class name "story-heading"
 for story_heading in soup.find_all(class_="story-heading"): 
+    
     # for the story headings that are links, print out the text
     # and format it nicely
     # for the others, take the contents out and format it nicely
