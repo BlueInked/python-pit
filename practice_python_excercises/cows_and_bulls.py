@@ -28,3 +28,29 @@ def num_guess(ran_num, guessed_num):
             cows_bulls[0]+=1
     return cows_bulls
 
+if __name__=="__main__":
+    playing = True 
+    ran_num = str(random.randint(0,9999)) #random 4 digit number
+    guesses = 0
+
+    print("Let's play a game of Cowbull!") #the rules
+    print("I will generate a number, and you have to guess the numbers one digit at a time.")
+    print("For every number in the wrong place, you get a cow. For every one in the right place, you get a bull.")
+    print("The game ends when you get 4 bulls!")
+    print("Type exit at any prompt to exit.")
+
+    while playing:
+        guessed_num = input("Give me your best guess!")
+        if guessed_num == "exit":
+            break
+        cows_bulls_count = num_guess(ran_num,guessed_num)
+        guesses+=1
+
+        print("You have "+ str(cows_bulls_count[0]) + " cows, and " + str(cows_bulls_count[1]) + " bulls.")
+
+        if cows_bulls_count[1]==4:
+            playing = False
+            print("You win the game after " + str(guesses) + "! The number was "+str(ran_num))
+            break #redundant exit
+        else:
+            print("Your guess isn't quite right, try again.")
