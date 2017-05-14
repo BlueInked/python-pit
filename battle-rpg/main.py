@@ -28,7 +28,9 @@ bomb = Item("Bomb", "attack", "Deals 500 damage", 500)
 rock = Item("Rock", "attack", "Deals 5 damage", 5)
 
 player_spells = [fire, thunder, blizzard, cosmic, cure, cura]
-player_items = [potion, hipotion, superpotion, elixir, superelixir, bomb, rock]
+player_items = [{"item": potion, "quantity": 17}, {"item": hipotion, "quantity": 4},
+                {"item": superpotion, "quantity": 2}, {"item": elixir, "quantity": 5},
+                {"item": superelixir, "quantity": 3}, {"item": bomb, "quantity": 7}, {"item": rock, "quantity": 15}]
 
 #Instantiate People
 player = Person(460, 65, 60, 34, player_spells , player_items)
@@ -68,7 +70,7 @@ while running:
 
         if spell.type == "white":
             player.heal(magic_dmg)
-            print(bcolors.OKBLUE + "\n" + spell.name + "heals for", str(magic_dmg), "HP" + bcolors.ENDC)
+            print(bcolors.OKBLUE + "\n" + spell.name + " heals for", str(magic_dmg), "HP" + bcolors.ENDC)
         elif spell.type == "black":
             enemy.take_damage(magic_dmg)
             print(bcolors.OKBLUE + "\n" + spell.name + " deals", str(magic_dmg), "points of damage." + bcolors.ENDC)
@@ -79,18 +81,31 @@ while running:
         if item_choice == -1:
             continue
 
-        item = player.items[item_choice]
+        item = player.items[item_choice]["item"]
+
+        if player.items[item_choice]["quantity"] == 0:
+            print(bcolors.FAIL + "\n" + "Item Not Available" + bcolors.ENDC)
+            continue
+
+        player.items[item_choice]["quantity"] -=1
 
         if item.type == "potion":
             player.heal(item.prop)
-            print(bcolors.OKGREEN + "\n" + item.name + "heals for", str(item.prop), "HP" + bcolors.ENDC)
+            print(bcolors.OKGREEN + "\n" + item.name + " heals for", str(item.prop), "HP" + bcolors.ENDC)
+        elif item.type == "elixir":
+            player.hp = player.maxhp
+            player.mp = player.maxmp
+            print(bcolors.OKGREEN + "\n" + item.name + " fully restores HP/MP" + bcolors.ENDC)
+        elif item.type == "attack":
+            enemy.take_damage(item.prop)
+            print(bcolors.FAIL + "\n" + item.name + " deals", str(item.prop), "points of damage." + bcolors.ENDC)
 
 
     enemy_choice = 1
 
     enemy_dmg = enemy.generate_damage()
     player.take_damage(enemy_dmg)
-    print("Enemy attacks for", enemy_dmg, "points of damage.")
+    print("Enemy attacks for ", enemy_dmg, " points of damage.")
 
     print("--------------------------------------------------")
     print("Enemy HP:",  bcolors.FAIL + str(enemy.get_hp()) + "/" + str(enemy.get_max_hp()) + bcolors.ENDC + "\n")
