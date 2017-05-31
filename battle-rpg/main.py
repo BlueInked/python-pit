@@ -4,22 +4,22 @@ from classes.inventory import Item
 
 
 #Black Magic
-fire = Spell("Fire", 10, 100, "black")
-thunder = Spell("Thunder", 12, 120, "black")
-blizzard = Spell("Blizzard", 11, 90, "black")
-quake = Spell("Quake", 13, 125, "black")
-cosmic = Spell("Cosmic", 20, 200, "black")
-doom = Spell("Doom",30, 300, "black")
+fire = Spell("Fire", 25, 300, "black")
+thunder = Spell("Thunder", 25, 320, "black")
+blizzard = Spell("Blizzard", 20, 200, "black")
+quake = Spell("Quake", 30, 325, "black")
+cosmic = Spell("Cosmic", 40, 600, "black")
+doom = Spell("Doom",50, 800, "black")
 
 #White Magic
-cure = Spell("Cure", 12, 120, "white")
-cura = Spell("Cura", 20, 220, "white")
+cure = Spell("Cure", 25, 320, "white")
+cura = Spell("Cura", 40, 620, "white")
 
 
 #Healing Items
 potion = Item("Potion", "potion", "Heals 50 HP", 50)
 hipotion = Item("Hi-Potion", "potion", "Heals 100 HP", 100)
-superpotion = Item("Super Potion", "potion", "Heals 500 HP", 500)
+superpotion = Item("Super Potion", "potion", "Heals 500 HP", 1000)
 elixir = Item("Elixir", "elixir", "Fully restores HP/MP of one party member", 9999)
 superelixir = Item("Super Elixir", "elixir", "Fully restores party's HP/MP", 9999)
 
@@ -33,10 +33,10 @@ player_items = [{"item": potion, "quantity": 17}, {"item": hipotion, "quantity":
                 {"item": superelixir, "quantity": 3}, {"item": bomb, "quantity": 7}, {"item": rock, "quantity": 15}]
 
 #Instantiate People
-player1 = Person("Cicyla: ", 3565, 80, 60, 83, player_spells , player_items)
-player2 = Person("Rosalba:", 4500, 65, 120, 100, player_spells , player_items)
-player3 = Person("Tivmeda:", 3120, 98, 40, 50, player_spells , player_items)
-enemy = Person("Devos", 12000, 65, 45, 25, [], [])
+player1 = Person("Cicyla: ", 3565, 157, 300, 183, player_spells , player_items)
+player2 = Person("Rosalba:", 4500, 100, 330, 300, player_spells , player_items)
+player3 = Person("Tivmeda:", 3120, 188, 200, 250, player_spells , player_items)
+enemy = Person("Devos", 12000, 217, 505, 300, [], [])
 
 players = [player1, player2, player3]
 
@@ -49,7 +49,7 @@ while running:
 
     print("\n\n")
 
-    print("NAME                     HP                                      MP")
+    print("NAME                     HP                                                   MP")
 
     for player in players:
          player.get_stats()
